@@ -73,3 +73,4 @@ com.example.myassistant/
 Debug APK is in the releases section of this repo.
 
 ## Screen Recording
+https://youtube.com/shorts/vE2ISYbM9W8?feature=share
