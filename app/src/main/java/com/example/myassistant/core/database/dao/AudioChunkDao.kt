@@ -16,9 +16,9 @@ interface AudioChunkDao{
     @Update
     suspend fun update(audioChunk: AudioChunkEntity)
 
-    @Query("SELECT * FROM audioChunk ORDER BY chunkIndex")
-    fun getChunksForMeeting(meetingId: String): List<AudioChunkEntity>
+    @Query("SELECT * FROM audio_chunks WHERE meetingId = :meetingId ORDER BY chunkIndex ASC")
+    suspend fun getChunksForMeeting(meetingId: String): List<AudioChunkEntity>
 
-    @Query("SELECT * FROM audioChunk WHERE transcriptionStatus  = 'PENDING'")
+    @Query("SELECT * FROM audio_chunks WHERE transcriptionStatus  = 'PENDING'")
     suspend fun getPendingChunks(): List<AudioChunkEntity>
 }
