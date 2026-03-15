@@ -1,6 +1,3 @@
-# TwinMind Android - Take Home Assignment
-
-This is my submission for the TwinMind Android Developer assignment. Built over 48 hours using Kotlin, Jetpack Compose, MVVM, Hilt, Room, and Coroutines.
 
 ## What I Built
 
