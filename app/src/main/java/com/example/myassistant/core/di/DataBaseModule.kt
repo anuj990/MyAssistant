@@ -1,7 +1,8 @@
-package com.example.myassistant.core.database
+package com.example.myassistant.core.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.myassistant.core.database.AppDatabase
 import com.example.myassistant.core.database.dao.AudioChunkDao
 import com.example.myassistant.core.database.dao.MeetingDao
 import com.example.myassistant.core.database.dao.SummaryDao
@@ -18,7 +19,7 @@ import javax.inject.Singleton
 object DataBaseModule {
     @Provides
     @Singleton
-    fun provideDatabase(@ApplicationContext context : Context): AppDatabase{
+    fun provideDatabase(@ApplicationContext context : Context): AppDatabase {
         return Room.databaseBuilder(
             context,
             AppDatabase::class.java,
