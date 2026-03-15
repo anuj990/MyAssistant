@@ -17,7 +17,7 @@ interface SummaryDao{
     @Update
    suspend fun update(summary : SummaryEntity)
 
-    @Query("SELECT * FROM summary WHERE meetingId = :meetingId")
+    @Query("SELECT * FROM summaries WHERE meetingId = :meetingId")
     fun getSummaryForMeeting(meetingId: String): Flow<SummaryEntity?>
 
 }

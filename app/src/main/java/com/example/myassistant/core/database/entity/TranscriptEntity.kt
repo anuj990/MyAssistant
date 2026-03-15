@@ -5,9 +5,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "transcripts")
 data class TranscriptEntity(
-    @PrimaryKey val id : String,
-    val meetingId : String,
-    val chunkId : String,
-    val text : String,
-    val chunkOrder : String
+    @PrimaryKey val id: String,
+    val meetingId: String,
+    val chunkId: String,
+    val text: String,
+    val chunkOrder: Int
 )

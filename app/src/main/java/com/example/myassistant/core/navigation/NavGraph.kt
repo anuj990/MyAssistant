@@ -2,6 +2,7 @@ package com.example.myassistant.core.navigation
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -12,10 +13,11 @@ import com.example.myassistant.feature.summary.SummaryScreen
 import com.example.myassistant.feature.transcript.TranscriptScreen
 
 @Composable
-fun NavGraph(navController: NavHostController) {
+fun NavGraph(navController: NavHostController,modifier: Modifier = Modifier) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Dashboard.route
+        startDestination = Screen.Dashboard.route,
+        modifier = modifier
     ) {
 
         composable(Screen.Dashboard.route) {

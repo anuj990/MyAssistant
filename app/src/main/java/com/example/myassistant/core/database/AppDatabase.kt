@@ -12,8 +12,13 @@ import com.example.myassistant.core.database.entity.SummaryEntity
 import com.example.myassistant.core.database.entity.TranscriptEntity
 
 @Database(
-    entities = [AudioChunkEntity::class, MeetingEntity::class, SummaryEntity::class, TranscriptEntity::class],
-    version = 1,
+    entities = [
+        MeetingEntity::class,
+        AudioChunkEntity::class,
+        TranscriptEntity::class,
+        SummaryEntity::class
+    ],
+    version = 2,
     exportSchema = false
 )
 abstract class AppDatabase: RoomDatabase(){

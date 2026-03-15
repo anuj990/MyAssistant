@@ -24,7 +24,9 @@ object DataBaseModule {
             context,
             AppDatabase::class.java,
             "my_assistant_db"
-        ).build()
+        )
+            .fallbackToDestructiveMigration()
+            .build()
     }
     @Provides
     fun provideMeetingDao(db: AppDatabase): MeetingDao = db.meetingDao()

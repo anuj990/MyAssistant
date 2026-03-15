@@ -142,22 +142,32 @@ class RecordingService : Service(){
             }
         },30000L,30000L)
     }
-    private fun rotatechunk(){
+    private fun rotatechunk() {
+        if (mediaRecorder == null) return
+
         val savedFilePath = "${getExternalFilesDir(null)}/chunk_${meetingId}_${chunkIndex}.m4a"
-        mediaRecorder?.stop()
+
+        try {
+            mediaRecorder?.stop()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
         mediaRecorder?.release()
         mediaRecorder = null
+
         scope.launch {
             audioChunkDao.insert(
                 AudioChunkEntity(
                     id = UUID.randomUUID().toString(),
                     meetingId = meetingId,
-                    filePath =  savedFilePath,
-                    chunkIndex  = chunkIndex,
+                    filePath = savedFilePath,
+                    chunkIndex = chunkIndex,
                     transcriptionStatus = "PENDING"
                 )
             )
         }
+
         if (!hasEnoughStorage()) {
             updateNotification("Recording stopped - Low storage")
             stopRecording()
@@ -165,7 +175,6 @@ class RecordingService : Service(){
         }
         chunkIndex++
         startNewChunk()
-
     }
     private fun startNewChunk() {
         val outputFile = "${getExternalFilesDir(null)}/chunk_${meetingId}_${chunkIndex}.m4a"
@@ -191,17 +200,32 @@ class RecordingService : Service(){
         chunkTimer = null
         silenceTimer?.cancel()
         silenceTimer = null
-        mediaRecorder?.stop()
-        mediaRecorder?.release()
-        mediaRecorder  = null
-        scope.launch {
-            meetingDao.getMeetingById(meetingId)?.let {meeting->
-                meetingDao.update(
-                    meeting.copy(endTime = System.currentTimeMillis(), status = "STOPPED")
-                )
 
+        val savedFilePath = "${getExternalFilesDir(null)}/chunk_${meetingId}_${chunkIndex}.m4a"
+        try { mediaRecorder?.stop() } catch (e: Exception) { e.printStackTrace() }
+        mediaRecorder?.release()
+        mediaRecorder = null
+
+        scope.launch {
+            audioChunkDao.insert(
+                AudioChunkEntity(
+                    id = UUID.randomUUID().toString(),
+                    meetingId = meetingId,
+                    filePath = savedFilePath,
+                    chunkIndex = chunkIndex,
+                    transcriptionStatus = "PENDING"
+                )
+            )
+            meetingDao.getMeetingById(meetingId)?.let { meeting ->
+                meetingDao.update(
+                    meeting.copy(
+                        endTime = System.currentTimeMillis(),
+                        status = "STOPPED"
+                    )
+                )
             }
         }
+
         stopForeground(STOP_FOREGROUND_REMOVE)
         stopSelf()
     }
