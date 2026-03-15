@@ -5,9 +5,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "meetings")
 data class MeetingEntity(
-    @PrimaryKey val id : String,
-    val title : String,
-    val startingTime : Long,
-    val endTime  : Long?,
-    val status : Long
+    @PrimaryKey val id: String,
+    val title: String,
+    val startingTime: Long,
+    val endTime: Long?,
+    val status: String
 )
