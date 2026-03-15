@@ -11,6 +11,7 @@ hiltNavigationCompose = "1.2.0"
 room = "2.7.1"
 navigation = "2.8.9"
 espresso = "3.6.1"
+accompanistPermissions = "0.37.3"
 
 [libraries]
 # Core
@@ -47,7 +48,7 @@ androidx-junit = { group = "androidx.test.ext", name = "junit", version = "1.2.1
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
-
+accompanist-permissions = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanistPermissions" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

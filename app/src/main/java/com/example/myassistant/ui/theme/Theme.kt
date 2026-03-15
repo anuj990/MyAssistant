@@ -34,25 +34,15 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun MyAssistantTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
-    content: @Composable () -> Unit
-) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
-    }
-
+fun MyAssistantTheme(content: @Composable () -> Unit) {
     MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
+        colorScheme = darkColorScheme(
+            background = BackgroundDark,
+            surface = SurfaceDark,
+            primary = AccentBlue,
+            onBackground = TextPrimary,
+            onSurface = TextPrimary
+        ),
         content = content
     )
 }
